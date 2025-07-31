@@ -1,111 +1,82 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>RoofGuard Chatbot</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f4f4f4;
-      padding: 20px;
-    }
-
-    #chatbox {
-      border: 1px solid #ccc;
-      background: white;
-      padding: 15px;
-      height: 400px;
-      overflow-y: auto;
-      margin-bottom: 10px;
-    }
-
-    .user {
-      color: white;
-      font-weight: bold;
-      background: green;
-    }
-
-    .bot {
-      color: #0b8043;
-      font-weight: bold;
-    }
-<!--this is just space between the textbox and the send button-->
-    #inputArea {
-      display: flex;
-      gap: 10px;
-    }
-
-    input[type="text"] {
-      flex: 1;
-      padding: 10px;
-      font-size: 16px;
-    }
-<!--just for the size of send button-->
-    button {
-      padding: 10px 15px;
-      font-size: 30px;
-      cursor: pointer;
-    }
-
-    .message {
-      margin: 8px 0;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flownetic Roofing</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="bg-gray-950 text-white font-sans">
 
-  <h2>RoofGuard Chatbot</h2>
-  <div id="chatbox"></div>
+  <!-- Navbar -->
+  <header class="flex items-center justify-between px-6 py-4 border-b border-gray-800">
+    <h1 class="text-2xl font-bold tracking-wide">Flownetic</h1>
+    <nav class="space-x-6 hidden md:flex">
+      <a href="#services" class="hover:text-green-400 transition">Services</a>
+      <a href="#about" class="hover:text-green-400 transition">About</a>
+      <a href="#contact" class="hover:text-green-400 transition">Contact</a>
+    </nav>
+    <button 
+      id="chatbotBtn" 
+      class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded transition"
+      data-url="https://abdullah97155.github.io/Testrun/"
+    >
+      Chatbot
+    </button>
+  </header>
 
-  <div id="inputArea">
-    <input type="text" id="userInput" placeholder="Type your message..." />
-    <button onclick="sendMessage()">Send</button>
-  </div>
+  <!-- Hero Section -->
+  <section class="flex flex-col items-center justify-center text-center py-24 px-6 bg-gradient-to-b from-gray-900 to-black">
+    <h2 class="text-4xl md:text-6xl font-bold mb-4">Revolutionizing Roofing Solutions</h2>
+    <p class="text-gray-400 text-lg md:text-xl max-w-2xl">At Flownetic, we bring innovation, precision, and durability to your roof — one shingle at a time.</p>
+  </section>
 
+  <!-- Services -->
+  <section id="services" class="py-20 px-6 max-w-6xl mx-auto">
+    <h3 class="text-3xl font-semibold mb-8">Our Services</h3>
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="bg-gray-800 p-6 rounded-lg shadow hover:shadow-lg transition">
+        <h4 class="text-xl font-bold mb-2">Residential Roofing</h4>
+        <p class="text-gray-400">Protect your home with our expert shingle and tile roofing systems.</p>
+      </div>
+      <div class="bg-gray-800 p-6 rounded-lg shadow hover:shadow-lg transition">
+        <h4 class="text-xl font-bold mb-2">Commercial Roofing</h4>
+        <p class="text-gray-400">High-performance roofing for large commercial properties with warranties.</p>
+      </div>
+      <div class="bg-gray-800 p-6 rounded-lg shadow hover:shadow-lg transition">
+        <h4 class="text-xl font-bold mb-2">Roof Repair & Maintenance</h4>
+        <p class="text-gray-400">Reliable inspections, repairs, and storm damage coverage.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="py-20 px-6 bg-gray-900">
+    <div class="max-w-4xl mx-auto text-center">
+      <h3 class="text-3xl font-semibold mb-4">About Flownetic</h3>
+      <p class="text-gray-400 text-lg">We are a team of certified roofing specialists blending craftsmanship with the latest roofing technologies to ensure durability, safety, and beauty in every project.</p>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-20 px-6">
+    <div class="max-w-3xl mx-auto text-center">
+      <h3 class="text-3xl font-semibold mb-4">Contact Us</h3>
+      <p class="text-gray-400 mb-6">Have a question or want a free quote? Reach out and we’ll get back to you within 24 hours.</p>
+      <a href="mailto:contact@flownetic.com" class="text-green-400 hover:underline">contact@flownetic.com</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-6 border-t border-gray-800 text-center text-gray-500 text-sm">
+    © 2025 Flownetic Roofing. All rights reserved.
+  </footer>
+
+  <!-- Chatbot Script -->
   <script>
-    const chatbox = document.getElementById("chatbox");
-    const input = document.getElementById("userInput");
-
-    function appendMessage(sender, text) {
-      const div = document.createElement("div");
-      div.classList.add("message");
-      div.innerHTML = `<span class="${sender === 'User' ? 'user' : 'bot'}">${sender}:</span> ${text}`;
-      chatbox.appendChild(div);
-      chatbox.scrollTop = chatbox.scrollHeight;
-    }
-
-    function getBotResponse(message) {
-      const msg = message.toLowerCase();
-
-      if (msg.includes("quote") || msg.includes("price")) {
-        return "Please provide your name, phone, email, and a brief project description so we can prepare a quote.";
-      } else if (msg.includes("inspection")) {
-        return "We can schedule a roof inspection. Please provide your name, contact details, address, and preferred date.";
-      } else if (msg.includes("emergency")) {
-        return "For emergencies, please call us 24/7 at (800) 555-ROOF.";
-      } else if (msg.includes("services")) {
-        return "We offer roof installation, repairs, inspections, gutter services, and storm damage restoration.";
-      } else if (msg.includes("contact")) {
-        return "You can reach us at support@roofguardsolutions.com or call (800) 555-ROOF.";
-      } else {
-        return "I'm here to help with quotes, inspections, and roof repairs. How can I assist you?";
-      }
-    }
-
-    function sendMessage() {
-      const userText = input.value.trim();
-      if (!userText) return;
-
-      appendMessage("User", userText);
-      input.value = "";
-
-      setTimeout(() => {
-        const reply = getBotResponse(userText);
-        appendMessage("Bot", reply);
-      }, 500);
-    }
-
-    input.addEventListener("keydown", e => {
-      if (e.key === "Enter") sendMessage();
+    document.getElementById("chatbotBtn").addEventListener("click", function () {
+      const url = this.getAttribute("data-url");
+      window.open(url, "_blank");
     });
   </script>
 
