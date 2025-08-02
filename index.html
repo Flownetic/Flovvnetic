@@ -1,84 +1,464 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Flownetic Roofing</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flovvnetic.io - Custom AI Chatbots & Websites</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+        
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            background-color: #000000;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid #00ff88;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #00ff88;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #00ff88;
+        }
+        
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 5rem 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            margin-bottom: 3rem;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            color: #e0e0e0;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: #00ff88;
+            color: #121212;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            margin: 0.5rem;
+            border: 2px solid #00ff88;
+        }
+        
+        .cta-button:hover {
+            background-color: transparent;
+            color: #00ff88;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 255, 136, 0.3);
+        }
+        
+        .chatbot-button {
+            background-color: #121212;
+            color: #00ff88;
+            border: 2px solid #00ff88;
+        }
+        
+        .chatbot-button:hover {
+            background-color: #00ff88;
+            color: #121212;
+        }
+        
+        /* Sections */
+        section {
+            padding: 4rem 0;
+            border-bottom: 1px solid #333333;
+        }
+        
+        section:last-child {
+            border-bottom: none;
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: #00ff88;
+        }
+        
+        h3 {
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem;
+            color: #00ff88;
+        }
+        
+        h4 {
+            font-size: 1.4rem;
+            margin: 1.5rem 0 0.5rem;
+            color: #00cc6a;
+        }
+        
+        /* Features */
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+        
+        .feature-card {
+            background-color: #1e1e1e;
+            padding: 2rem;
+            border-radius: 5px;
+            width: 300px;
+            transition: all 0.3s;
+            border-left: 3px solid #00ff88;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 255, 136, 0.1);
+        }
+        
+        .feature-card h3 {
+            margin-top: 0;
+        }
+        
+        /* Video Section */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            max-width: 800px;
+            margin: 0 auto;
+            border: 3px solid #333333;
+            border-radius: 5px;
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        /* Gallery */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .gallery-item {
+            height: 250px;
+            overflow: hidden;
+            border-radius: 5px;
+            position: relative;
+            border: 2px solid #333333;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .gallery-item:hover {
+            border-color: #00ff88;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+        
+        .testimonial {
+            background-color: #1e1e1e;
+            padding: 2rem;
+            border-radius: 5px;
+            width: 350px;
+            border-top: 3px solid #00ff88;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+        
+        .testimonial-author {
+            font-weight: bold;
+            color: #00ff88;
+        }
+        
+        /* Lists */
+        ul, ol {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: #000000;
+            margin-top: 3rem;
+            border-top: 2px solid #00ff88;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-links a {
+            color: #e0e0e0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: #00ff88;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            section {
+                padding: 3rem 1rem;
+            }
+            
+            .features {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .feature-card {
+                width: 100%;
+            }
+            
+            .testimonials {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .testimonial {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
-<body class="bg-gray-950 text-white font-sans">
-
-  <!-- Navbar -->
-  <header class="flex items-center justify-between px-6 py-4 border-b border-gray-800">
-    <h1 class="text-2xl font-bold tracking-wide">Flownetic</h1>
-    <nav class="space-x-6 hidden md:flex">
-      <a href="#services" class="hover:text-green-400 transition">Services</a>
-      <a href="#about" class="hover:text-green-400 transition">About</a>
-      <a href="#contact" class="hover:text-green-400 transition">Contact</a>
+<body>
+    <nav>
+        <a href="https://flovvnetic.io" class="logo">Flovvnetic.io</a>
+        <div class="nav-links">
+            <a href="https://flovvnetic.io">Home</a>
+            <a href="https://flovvnetic.io/services">Services</a>
+            <a href="https://flovvnetic.io/about">About</a>
+            <a href="https://flovvnetic.io/contact">Contact</a>
+            <a href="https://flovvnetic.io/blog">Blog</a>
+        </div>
     </nav>
-    <button 
-      id="chatbotBtn" 
-      class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded transition"
-      data-url="https://flownetic.github.io/Flovvnetic_chatbot/"
-    >
-      Chatbot
-    </button>
-  </header>
 
-  <!-- Hero Section -->
-  <section class="flex flex-col items-center justify-center text-center py-24 px-6 bg-gradient-to-b from-gray-900 to-black">
-    <h2 class="text-4xl md:text-6xl font-bold mb-4">Revolutionizing Roofing Solutions</h2>
-    <p class="text-gray-400 text-lg md:text-xl max-w-2xl">At Flownetic, we bring innovation, precision, and durability to your roof — one shingle at a time.</p>
-  </section>
+    <div class="container">
+        <section class="hero">
+            <h1>Transform Your Business with AI-Powered Solutions</h1>
+            <p>Flovvnetic.io specializes in creating custom AI chatbots and stunning websites that drive engagement, automate processes, and boost your bottom line.</p>
+            <a href="https://flovvnetic.io/chatbot-demo" class="cta-button chatbot-button">Try Our Chatbot Demo</a>
+            <a href="#contact" class="cta-button">Get a Free Consultation</a>
+        </section>
 
-  <!-- Services -->
-  <section id="services" class="py-20 px-6 max-w-6xl mx-auto">
-    <h3 class="text-3xl font-semibold mb-8">Our Services</h3>
-    <div class="grid md:grid-cols-3 gap-8">
-      <div class="bg-gray-800 p-6 rounded-lg shadow hover:shadow-lg transition">
-        <h4 class="text-xl font-bold mb-2">Residential Roofing</h4>
-        <p class="text-gray-400">Protect your home with our expert shingle and tile roofing systems.</p>
-      </div>
-      <div class="bg-gray-800 p-6 rounded-lg shadow hover:shadow-lg transition">
-        <h4 class="text-xl font-bold mb-2">Commercial Roofing</h4>
-        <p class="text-gray-400">High-performance roofing for large commercial properties with warranties.</p>
-      </div>
-      <div class="bg-gray-800 p-6 rounded-lg shadow hover:shadow-lg transition">
-        <h4 class="text-xl font-bold mb-2">Roof Repair & Maintenance</h4>
-        <p class="text-gray-400">Reliable inspections, repairs, and storm damage coverage.</p>
-      </div>
+        <section id="about">
+            <h2>About Flovvnetic.io</h2>
+            <p>Founded in 2020, Flovvnetic.io has been at the forefront of AI and web development innovation. Our team of expert developers, designers, and AI specialists work together to create solutions that are not just technologically advanced but also user-friendly and business-focused.</p>
+            
+            <h3>Our Mission</h3>
+            <p>We believe that every business, regardless of size, should have access to cutting-edge AI tools and beautiful, functional websites. Our mission is to democratize AI technology and make it accessible and beneficial for all types of businesses.</p>
+            
+            <h3>Our Vision</h3>
+            <p>To create a world where human and artificial intelligence work in perfect harmony to solve business challenges, enhance customer experiences, and drive innovation across industries.</p>
+            
+            <h3>Our Values</h3>
+            <p>At Flovvnetic.io, we operate based on core values that guide every project we undertake:</p>
+            <ul>
+                <li><strong>Innovation:</strong> We constantly push boundaries to deliver solutions that are ahead of the curve.</li>
+                <li><strong>Quality:</strong> Every line of code, every design element meets our high standards.</li>
+                <li><strong>Transparency:</strong> We maintain open communication throughout the development process.</li>
+                <li><strong>Customer Focus:</strong> Your success is our success - we tailor solutions to your specific needs.</li>
+                <li><strong>Continuous Learning:</strong> In the fast-moving world of AI, we never stop learning and improving.</li>
+            </ul>
+        </section>
+
+        <section id="services">
+            <h2>Our Services</h2>
+            <div class="features">
+                <div class="feature-card">
+                    <h3>Custom AI Chatbots</h3>
+                    <p>Intelligent chatbots that understand natural language, learn from interactions, and provide 24/7 customer support, lead generation, and more.</p>
+                    <p>Our chatbots go beyond simple scripted responses. Powered by the latest in natural language processing and machine learning, they can understand context, detect sentiment, and provide increasingly accurate responses over time.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>Website Development</h3>
+                    <p>Beautiful, responsive websites designed to convert visitors into customers, with optimized performance and user experience.</p>
+                    <p>We create websites that not only look stunning but are built for performance, accessibility, and conversion. Our development process focuses on clean code, fast loading times, and mobile responsiveness.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>AI Integration</h3>
+                    <p>Enhance your existing systems with AI capabilities like predictive analytics, recommendation engines, and process automation.</p>
+                    <p>We specialize in integrating AI capabilities into your existing infrastructure to make it smarter and more efficient while maintaining data security and system stability.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="chatbot-demo">
+            <h2>Experience Our AI Chatbot</h2>
+            <p>See firsthand how our custom AI chatbots can transform your customer interactions. Try our demo chatbot to experience natural language understanding, contextual responses, and intelligent problem-solving.</p>
+            <div style="text-align: center; margin: 3rem 0;">
+                <a href="https://flovvnetic.io/chatbot-demo" class="cta-button chatbot-button">Launch Chatbot Demo</a>
+            </div>
+        </section>
+
+        <section id="video-demo">
+            <h2>See Our Work in Action</h2>
+            <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/xNUx-rMGvvw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <p style="text-align: center; margin-top: 1rem;">Watch how we transformed a client's customer service with our AI chatbot solution.</p>
+        </section>
+
+        <section id="gallery">
+            <h2>Our Work Gallery</h2>
+            <div class="gallery">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Chatbot Interface">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Website Design">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Team Working">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="AI Technology">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Web Development">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Office Space">
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials">
+            <h2>What Our Clients Say</h2>
+            <div class="testimonials">
+                <div class="testimonial">
+                    <p class="testimonial-text">"Flovvnetic.io transformed our customer service operations. Their chatbot handles 70% of our inquiries with higher satisfaction scores than our human agents achieved previously."</p>
+                    <p class="testimonial-author">- Sarah Johnson, CXO at RetailCorp</p>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial-text">"The website Flovvnetic.io built for us increased our conversion rate by 45%. Their attention to detail and user experience focus made all the difference."</p>
+                    <p class="testimonial-author">- Michael Chen, Founder of TechStart</p>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial-text">"Working with Flovvnetic.io was a game-changer. Their AI solution automated our most tedious processes, freeing our team to focus on strategic work."</p>
+                    <p class="testimonial-author">- David Wilson, Operations Director at FinServe</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Ready to Transform Your Business?</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 2rem;">Whether you need a custom AI chatbot, a stunning new website, or both, we'd love to discuss how we can help your business grow.</p>
+            <div style="text-align: center;">
+                <a href="https://flovvnetic.io/contact" class="cta-button">Contact Us Today</a>
+            </div>
+        </section>
     </div>
-  </section>
 
-  <!-- About Section -->
-  <section id="about" class="py-20 px-6 bg-gray-900">
-    <div class="max-w-4xl mx-auto text-center">
-      <h3 class="text-3xl font-semibold mb-4">About Flownetic</h3>
-      <p class="text-gray-400 text-lg">We are a team of certified roofing specialists blending craftsmanship with the latest roofing technologies to ensure durability, safety, and beauty in every project.</p>
-    </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section id="contact" class="py-20 px-6">
-    <div class="max-w-3xl mx-auto text-center">
-      <h3 class="text-3xl font-semibold mb-4">Contact Us</h3>
-      <p class="text-gray-400 mb-6">Have a question or want a free quote? Reach out and we’ll get back to you within 24 hours.</p>
-      <a href="mailto:contact@flownetic.com" class="text-green-400 hover:underline">contact@flownetic.com</a>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="py-6 border-t border-gray-800 text-center text-gray-500 text-sm">
-    © 2025 Flownetic Roofing. All rights reserved.
-  </footer>
-
-  <!-- Chatbot Script -->
-  <script>
-    document.getElementById("chatbotBtn").addEventListener("click", function () {
-      const url = this.getAttribute("data-url");
-      window.open(url, "_blank");
-    });
-  </script>
-
+    <footer>
+        <div class="footer-links">
+            <a href="https://flovvnetic.io/privacy">Privacy Policy</a>
+            <a href="https://flovvnetic.io/terms">Terms of Service</a>
+            <a href="https://flovvnetic.io/careers">Careers</a>
+            <a href="https://flovvnetic.io/blog">Blog</a>
+        </div>
+        <p>&copy; 2023 Flovvnetic.io. All rights reserved.</p>
+    </footer>
 </body>
 </html>
